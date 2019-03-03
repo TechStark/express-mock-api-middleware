@@ -1,4 +1,3 @@
-import { existsSync } from 'fs';
 import { join, basename } from 'path';
 import bodyParser from 'body-parser';
 import glob from 'glob';
@@ -13,9 +12,7 @@ const BODY_PARSED_METHODS = ['post', 'put', 'patch', 'delete'];
 
 export default function getMockMiddleware(mockDir) {
   const absMockPath = mockDir;
-  const absConfigPath = join(mockDir, '.umirc.mock.js');
-  const absPagesPath = join(mockDir, 'pages');
-  const debug = console.debug;
+  const { debug } = console;
   const errors = [];
 
   let mockData = getConfig();
@@ -23,12 +20,9 @@ export default function getMockMiddleware(mockDir) {
 
   function watch() {
     if (process.env.WATCH_FILES === 'none') return;
-    const watcher = chokidar.watch(
-      [absConfigPath, absMockPath, join(absPagesPath, '**/_mock.js')],
-      {
-        ignoreInitial: true,
-      }
-    );
+    const watcher = chokidar.watch([absMockPath], {
+      ignoreInitial: true,
+    });
     watcher.on('all', (event, file) => {
       debug(`[${event}] ${file}, reload mock data`);
       mockData = getConfig();
@@ -44,37 +38,25 @@ export default function getMockMiddleware(mockDir) {
 
     cleanRequireCache();
     let ret = {};
-    if (existsSync(absConfigPath)) {
-      debug(`load mock data from ${absConfigPath}`);
-      ret = require(absConfigPath); // eslint-disable-line
-    } else {
-      const mockFiles = glob
-        .sync('**/*.js', {
-          cwd: absMockPath,
-        })
-        .map(p => join(absMockPath, p))
-        .concat(
-          glob
-            .sync('**/_mock.js', {
-              cwd: absPagesPath,
-            })
-            .map(p => join(absPagesPath, p))
-        );
-      debug(`load mock data from ${absMockPath}, including files ${JSON.stringify(mockFiles)}`);
-      try {
-        ret = mockFiles.reduce((memo, mockFile) => {
-          const m = require(mockFile); // eslint-disable-line
-          memo = {
-            ...memo,
-            ...(m.default || m),
-          };
-          return memo;
-        }, {});
-      } catch (e) {
-        errors.push(e);
-        signale.error(`Mock file parse failed`);
-        console.error(e.message);
-      }
+    const mockFiles = glob
+      .sync('**/*.js', {
+        cwd: absMockPath,
+      })
+      .map(p => join(absMockPath, p));
+    debug(`load mock data from ${absMockPath}, including files ${JSON.stringify(mockFiles)}`);
+    try {
+      ret = mockFiles.reduce((memo, mockFile) => {
+        const m = require(mockFile); // eslint-disable-line
+        memo = {
+          ...memo,
+          ...(m.default || m),
+        };
+        return memo;
+      }, {});
+    } catch (e) {
+      errors.push(e);
+      signale.error(`Mock file parse failed`);
+      console.error(e.message);
     }
     return normalizeConfig(ret);
   }
@@ -145,11 +127,7 @@ export default function getMockMiddleware(mockDir) {
 
   function cleanRequireCache() {
     Object.keys(require.cache).forEach(file => {
-      if (
-        file === absConfigPath ||
-        file.indexOf(absMockPath) > -1 ||
-        basename(file) === '_mock.js'
-      ) {
+      if (file.indexOf(absMockPath) > -1 || basename(file) === '_mock.js') {
         delete require.cache[file];
       }
     });
@@ -204,7 +182,7 @@ export default function getMockMiddleware(mockDir) {
     })[0];
   }
 
-  return function UMI_MOCK(req, res, next) {
+  return function mockMiddleware(req, res, next) {
     const match = matchMock(req);
 
     if (match) {
