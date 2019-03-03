@@ -1,2 +1,2 @@
 # mock-api-middleware
-Webpack middleware for mocking restful APIs
+Express middleware for mocking restful APIs
