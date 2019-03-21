@@ -10,7 +10,7 @@ import multer from 'multer';
 const VALID_METHODS = ['get', 'post', 'put', 'patch', 'delete'];
 const BODY_PARSED_METHODS = ['post', 'put', 'patch', 'delete'];
 
-export default function getMockMiddleware(mockDir) {
+export default function getMockMiddleware(mockDir, options) {
   const absMockPath = mockDir;
   const { debug } = console;
   const errors = [];
@@ -41,6 +41,7 @@ export default function getMockMiddleware(mockDir) {
     const mockFiles = glob
       .sync('**/*.js', {
         cwd: absMockPath,
+        ...options,
       })
       .map(p => join(absMockPath, p));
     debug(`load mock data from ${absMockPath}, including files ${JSON.stringify(mockFiles)}`);
