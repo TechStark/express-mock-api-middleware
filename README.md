@@ -22,7 +22,7 @@ const mockApiMiddleware = require('express-mock-api-middleware')(
 app.use(mockApiMiddleware);
 ```
 `path.resolve(__dirname, 'mock')` is the folder where mock API files are.
-`{ ignore: ['asm.js'] }` is the options for more flexible glob. (See [options](https://github.com/isaacs/node-glob#options))
+`{ ignore: ['asm.js'] }` is the options for more flexible glob. (See how to use `ignore` in [options](https://github.com/isaacs/node-glob#options))
 
 ## Mock files
 For example in file `/mock/user.js`, you can have content

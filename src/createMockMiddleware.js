@@ -10,9 +10,10 @@ import multer from 'multer';
 const VALID_METHODS = ['get', 'post', 'put', 'patch', 'delete'];
 const BODY_PARSED_METHODS = ['post', 'put', 'patch', 'delete'];
 
+const debug = require('debug')('mock-api');
+
 export default function getMockMiddleware(mockDir, options) {
   const absMockPath = mockDir;
-  const { debug } = console;
   const errors = [];
 
   let mockData = getConfig();
@@ -39,9 +40,9 @@ export default function getMockMiddleware(mockDir, options) {
     cleanRequireCache();
     let ret = {};
     const mockFiles = glob
-      .sync('**/*.js', {
+      .sync('**/*.[jt]s', {
         cwd: absMockPath,
-        ...options,
+        ignore: (options || {}).ignore || [],
       })
       .map(p => join(absMockPath, p));
     debug(`load mock data from ${absMockPath}, including files ${JSON.stringify(mockFiles)}`);
@@ -57,7 +58,7 @@ export default function getMockMiddleware(mockDir, options) {
     } catch (e) {
       errors.push(e);
       signale.error(`Mock file parse failed`);
-      console.error(e.message);
+      debug(e.message);
     }
     return normalizeConfig(ret);
   }
@@ -128,7 +129,7 @@ export default function getMockMiddleware(mockDir, options) {
 
   function cleanRequireCache() {
     Object.keys(require.cache).forEach(file => {
-      if (file.indexOf(absMockPath) > -1 || basename(file) === '_mock.js') {
+      if (file.indexOf(absMockPath) > -1) {
         delete require.cache[file];
       }
     });
