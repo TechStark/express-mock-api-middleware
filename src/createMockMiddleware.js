@@ -57,8 +57,7 @@ export default function getMockMiddleware(mockDir, options) {
       }, {});
     } catch (e) {
       errors.push(e);
-      signale.error(`Mock file parse failed`);
-      debug(e.message);
+      signale.error(`Mock file parse failed: ${e.message}`);
     }
     return normalizeConfig(ret);
   }
