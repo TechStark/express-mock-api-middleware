@@ -1,4 +1,4 @@
-import { join, basename } from 'path';
+import { join } from 'path';
 import bodyParser from 'body-parser';
 import glob from 'glob';
 import assert from 'assert';
