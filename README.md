@@ -50,3 +50,9 @@ export default {
   }
 };
 ```
+
+## Show debug log
+Set the `DEBUG` environment variable
+```
+DEBUG=mock-api
+```
