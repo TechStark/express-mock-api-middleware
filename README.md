@@ -27,17 +27,18 @@ app.use(mockApiMiddleware);
 ## Mock files
 For example in file `/mock/user.js`, you can have content
 ```
+// you can write your own mock logic here
 export default {
   'GET /api/user/info': {
     id: 101,
-    userName: 'wilson',
-    email: 'wilson@gmail.com',
-    firstName: 'Wilson',
-    lastName: 'Tian',
+    userName: 'bob',
+    email: 'bob@gmail.com',
+    firstName: 'Bob',
+    lastName: 'Bushee',
   },
   'POST /api/user/login': (req, res) => {
     const { userName, password } = req.body;
-    if (userName === 'wilson' && password === 'pass') {
+    if (userName === 'bob' && password === 'password') {
       res.send({
         success: true,
       });
