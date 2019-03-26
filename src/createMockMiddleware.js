@@ -70,6 +70,7 @@ export default function getMockMiddleware(mockDir, options) {
       method = splited[0].toLowerCase();
       path = splited[1]; // eslint-disable-line
     }
+    // debug(`parsed: ${method} ${path}`);
     assert(
       VALID_METHODS.includes(method),
       `Invalid method ${method} for path ${path}, please check your mock files.`
@@ -114,7 +115,11 @@ export default function getMockMiddleware(mockDir, options) {
       );
       const { method, path } = parseKey(key);
       const keys = [];
-      const re = pathToRegexp(path, keys);
+      const pathOptions = {
+        whitelist: ['%'], // treat %3A as regular chars
+      };
+      const re = pathToRegexp(path, keys, pathOptions);
+      // debug(re);
       memo.push({
         method,
         path,
