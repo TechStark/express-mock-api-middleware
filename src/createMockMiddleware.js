@@ -135,13 +135,14 @@ export default function getMockMiddleware(mockDir, options) {
   }
 
   function matchMock(req) {
-    const { path: exceptPath } = req;
-    const exceptMethod = req.method.toLowerCase();
+    const targetPath = req.path;
+    const targetMethod = req.method.toLowerCase();
+    // debug(`${targetMethod} ${targetPath}`);
 
     for (const mock of mockData) {
       const { method, re, keys } = mock;
-      if (method === exceptMethod) {
-        const match = re.exec(req.path);
+      if (method === targetMethod) {
+        const match = re.exec(targetPath);
         if (match) {
           const params = {};
 
@@ -179,7 +180,7 @@ export default function getMockMiddleware(mockDir, options) {
     }
 
     return mockData.filter(({ method, re }) => {
-      return method === exceptMethod && re.test(exceptPath);
+      return method === targetMethod && re.test(targetPath);
     })[0];
   }
 
