@@ -7,7 +7,7 @@ import pathToRegexp from 'path-to-regexp';
 import signale from 'signale';
 import multer from 'multer';
 
-const VALID_METHODS = ['get', 'post', 'put', 'patch', 'delete'];
+// const VALID_METHODS = ['get', 'post', 'put', 'patch', 'delete', 'head'];
 const BODY_PARSED_METHODS = ['post', 'put', 'patch', 'delete'];
 
 const debug = require('debug')('mock-api');
@@ -71,10 +71,10 @@ export default function getMockMiddleware(mockDir, options) {
       path = splited[1]; // eslint-disable-line
     }
     // debug(`parsed: ${method} ${path}`);
-    assert(
-      VALID_METHODS.includes(method),
-      `Invalid method ${method} for path ${path}, please check your mock files.`
-    );
+    // assert(
+    //   VALID_METHODS.includes(method),
+    //   `Invalid method ${method} for path ${path}, please check your mock files.`
+    // );
     return {
       method,
       path,

@@ -1,6 +1,6 @@
 {
   "name": "express-mock-api-middleware",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Express middleware for mocking restful APIs",
   "main": "lib/index.js",
   "scripts": {
