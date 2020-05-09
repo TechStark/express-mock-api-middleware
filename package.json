@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "babel src -d lib",
+    "test": "exit 0",
     "prepack": "npm run build"
   },
   "repository": {
