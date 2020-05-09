@@ -1,6 +1,8 @@
 # express-mock-api-middleware
 Express middleware for mocking restful APIs
 
+![express-mock-api-middleware CI](https://github.com/TechStark/express-mock-api-middleware/workflows/express-mock-api-middleware%20CI/badge.svg)
+
 # Install
 ```
 npm install --save-dev express-mock-api-middleware
