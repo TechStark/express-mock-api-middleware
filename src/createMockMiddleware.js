@@ -44,7 +44,7 @@ export default function getMockMiddleware(mockDir, options) {
         cwd: absMockPath,
         ignore: (options || {}).ignore || [],
       })
-      .map(p => join(absMockPath, p));
+      .map((p) => join(absMockPath, p));
     debug(`load mock data from ${absMockPath}, including files ${JSON.stringify(mockFiles)}`);
     try {
       ret = mockFiles.reduce((memo, mockFile) => {
@@ -82,7 +82,7 @@ export default function getMockMiddleware(mockDir, options) {
   }
 
   function createHandler(method, path, handler) {
-    return function(req, res, next) {
+    return function (req, res, next) {
       if (BODY_PARSED_METHODS.includes(method)) {
         bodyParser.json({ limit: '5mb', strict: false })(req, res, () => {
           bodyParser.urlencoded({ limit: '5mb', extended: true })(req, res, () => {
@@ -132,7 +132,7 @@ export default function getMockMiddleware(mockDir, options) {
   }
 
   function cleanRequireCache() {
-    Object.keys(require.cache).forEach(file => {
+    Object.keys(require.cache).forEach((file) => {
       if (file.indexOf(absMockPath) > -1) {
         delete require.cache[file];
       }
