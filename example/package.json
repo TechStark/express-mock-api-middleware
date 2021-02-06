@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "express-mock-api-middleware": "^1.0.9"
+    "express-mock-api-middleware": "^1.0.10"
   }
 }

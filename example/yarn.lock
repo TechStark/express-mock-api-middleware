@@ -133,7 +133,7 @@ chalk@^2.3.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chokidar@^3.4.3:
+chokidar@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.1.tgz#ee9ce7bbebd2b79f49f304799d5468e31e14e68a"
   integrity sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==
@@ -307,14 +307,14 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-express-mock-api-middleware@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/express-mock-api-middleware/-/express-mock-api-middleware-1.0.9.tgz#207cad92e937a63d2c89f385c711cfac5f567726"
-  integrity sha512-P3r1pEkRTZkfS2rmgEyz90b1ezUBckHm0ID/ppzkTAUgbFoq9owWrpphn24B0kNF/+Z3oIlcLWiTbQdtqwhyOw==
+express-mock-api-middleware@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/express-mock-api-middleware/-/express-mock-api-middleware-1.0.10.tgz#439c61ad6fff27b9f6f6261c1aaac6956b306988"
+  integrity sha512-0H5BgUxNVwf3AEO4y1G7+Bh2BzIKZn2wnxYZkVhw62ifkdaVDHpPWcsj2bLpAAcSAmwqV6X2DHx+JqnHG0SZ0w==
   dependencies:
     assert "^2.0.0"
     body-parser "^1.19.0"
-    chokidar "^3.4.3"
+    chokidar "^3.5.1"
     debug "^4.3.1"
     glob "^7.1.6"
     multer "^1.4.2"
