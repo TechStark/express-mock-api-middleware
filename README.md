@@ -7,6 +7,10 @@ Express middleware for mocking restful APIs
 ```
 npm install --save-dev express-mock-api-middleware
 ```
+or
+```
+yarn add --dev express-mock-api-middleware
+```
 
 # Usage
 
