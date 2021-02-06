@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import glob from 'glob';
 import assert from 'assert';
 import chokidar from 'chokidar';
-import pathToRegexp from 'path-to-regexp';
+import { pathToRegexp } from 'path-to-regexp';
 import signale from 'signale';
 import multer from 'multer';
 
