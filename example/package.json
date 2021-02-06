@@ -1,0 +1,14 @@
+{
+  "name": "express-mock-api-example",
+  "version": "1.0.0",
+  "description": "Example of using express-mock-api-middleware for mocking restful APIs",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-mock-api-middleware": "1.0.5"
+  }
+}
